@@ -117,7 +117,14 @@ class ShellServer {
           throw new Error(`Command not allowed: ${baseCommand}`);
         }
 
-        const { stdout, stderr } = await execa(command, [], {
+        // Allow custom shell commands, e.g.:
+        // "zsh -i -c" - to get aliases and variables from ~/.zshrc
+        const shell = process.env.MCP_SHELL;
+        const shellCommand = shell
+          ? `${shell} '${command}'`
+          : command;
+
+        const { stdout, stderr } = await execa(shellCommand, [], {
           shell: true,
           env: process.env,
         });
