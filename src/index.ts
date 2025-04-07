@@ -14,11 +14,6 @@ interface CommandResult {
 
 // Dangerous commands that should never be allowed
 const BLACKLISTED_COMMANDS = new Set([
-  // File System Destruction Commands
-  'rm', // Remove files/directories - Could delete critical system or user files
-  'rmdir', // Remove directories - Could delete important directories
-  'del', // Windows delete command - Same risks as rm
-
   // Disk/Filesystem Commands
   'format', // Formats entire disks/partitions - Could destroy all data on drives
   'mkfs', // Make filesystem - Could reformat drives and destroy data
